@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <title>吴青峰 · 太空人 | 音乐人格测试</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: #0a1c12;
+      position: relative;
+    }
+    .aurora-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at 15% 25%, rgba(60, 140, 80, 0.35), transparent 45%),
+                  radial-gradient(circle at 85% 75%, rgba(20, 100, 50, 0.35), transparent 50%),
+                  radial-gradient(circle at 45% 85%, rgba(80, 180, 100, 0.2), transparent 55%),
+                  radial-gradient(circle at 75% 15%, rgba(30, 120, 60, 0.3), transparent 40%),
+                  radial-gradient(circle at 30% 50%, rgba(100, 200, 120, 0.15), transparent 45%);
+      filter: blur(70px);
+      animation: auroraFlow 24s infinite alternate ease-in-out;
+    }
+    @keyframes auroraFlow {
+      0% { transform: scale(1) translate(0, 0); opacity: 0.75; }
+      50% { transform: scale(1.08) translate(-1.5%, 2.5%); opacity: 0.9; }
+      100% { transform: scale(1.03) translate(1%, -1.5%); opacity: 0.8; }
+    }
+    :root {
+      --primary: #1a6b3c;
+      --primary-light: #2e9c5a;
+      --border: rgba(60, 140, 80, 0.25);
+      --surface: rgba(8, 24, 14, 0.65);
+      --surface-light: rgba(12, 32, 18, 0.75);
+      --text: rgba(235, 250, 230, 0.95);
+    }
+    .card {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 820px;
+      background: var(--surface);
+      backdrop-filter: blur(30px) saturate(180%);
+      -webkit-backdrop-filter: blur(30px) saturate(180%);
+      border: 1px solid var(--border);
+      border-radius: 44px;
+      padding: 2.5rem 2.2rem;
+      box-shadow: 0 30px 50px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(80,180,100,0.1);
+      color: var(--text);
+    }
+    h1 { font-size: 2.8rem; font-weight: 650; margin-bottom: 0.5rem; background: linear-gradient(135deg, #e0ffe0, #b0e8b0); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    h2 { font-size: 1.9rem; margin-bottom: 1rem; }
+    h3 { font-size: 1.3rem; margin-bottom: 0.8rem; color: #c0e8c0; }
+    .btn {
+      background: rgba(20,60,30,0.5);
+      border: 1px solid var(--border);
+      color: white;
+      padding: 12px 28px;
+      border-radius: 60px;
+      font-weight: 500;
+      font-size: 1rem;
+      backdrop-filter: blur(10px);
+      transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), background 0.2s;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn:active { transform: scale(0.94); transition: transform 0.08s cubic-bezier(0.2,0.9,0.4,1); }
+    .btn-primary { background: var(--primary); border-color: rgba(80,180,100,0.5); box-shadow: 0 8px 20px rgba(26,107,60,0.3); }
+    .btn-primary:hover { background: var(--primary-light); }
+    .btn-outline { background: transparent; }
+    .progress-bar-container { background: rgba(30,70,40,0.4); height: 8px; border-radius: 20px; margin: 12px 0; }
+    .progress-fill { background: var(--primary-light); height: 8px; border-radius: 20px; width: 0%; box-shadow: 0 0 12px #3abf6e; }
+    .options-list { display: flex; flex-direction: column; gap: 12px; margin: 28px 0 24px; }
+    .option-item {
+      background: rgba(15,45,25,0.5); backdrop-filter: blur(8px); border: 1px solid rgba(60,120,70,0.2);
+      border-radius: 36px; padding: 18px 26px; cursor: pointer; font-size: 1.05rem; font-weight: 450;
+    }
+    .option-item:active { transform: scale(0.99); }
+    .option-item:hover { background: rgba(30,80,45,0.6); border-color: var(--primary-light); }
+    .song-card { background: rgba(0,0,0,0.15); border-radius: 28px; padding: 22px; margin: 22px 0; border: 1px solid rgba(60,120,70,0.15); }
+    .dimension-item { margin: 18px 0; }
+    .dim-bar { background: rgba(30,70,40,0.4); height: 8px; border-radius: 20px; margin: 8px 0 6px; }
+    .dim-fill-low { background: #5f9e6b; height: 8px; border-radius: 20px; }
+    .dim-fill-mid { background: #3eaa5e; height: 8px; border-radius: 20px; }
+    .dim-fill-high { background: #2bbd60; height: 8px; border-radius: 20px; }
+    .similar-link, .deep-link { color: #b0e8b0; text-decoration: underline dotted; text-underline-offset: 4px; cursor: pointer; font-weight: 500; }
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(12px);
+      z-index: 1000; display: flex; align-items: center; justify-content: center;
+    }
+    .modal-card {
+      background: var(--surface-light); backdrop-filter: blur(40px); border-radius: 36px; padding: 30px;
+      max-width: 480px; border: 1px solid var(--border); box-shadow: 0 30px 50px #0000004d; color: white;
+    }
+    .blind-box {
+      background: linear-gradient(145deg, #142818, #0a1c0e); border-radius: 32px; padding: 24px;
+      border: 1px solid rgba(80,180,100,0.4); margin-top: 28px;
+    }
+    .nav-actions { display: flex; justify-content: space-between; margin-top: 30px; }
+    .persona-illustration {
+      display: flex; align-items: center; justify-content: center; background: rgba(10,30,15,0.5);
+      border-radius: 48px; padding: 30px 15px; margin-bottom: 24px; font-size: 5rem; backdrop-filter: blur(8px);
+    }
+    .author-note { margin-top: 32px; font-size: 0.8rem; opacity: 0.6; text-align: center; }
+    @media (max-width: 600px) { .card { padding: 1.8rem 1.2rem; } h1 { font-size: 2.2rem; } }
+  </style>
+</head>
+<body>
+  <div class="aurora-bg"></div>
+  <div class="card" id="app-card">
+    <div id="content-area"></div>
+    <div class="author-note" id="author-note-container"></div>
+  </div>
+
+  <script>
+    (function(){
+      "use strict";
+
+      // ---------- 深度解读（长篇详细版）----------
+      const songDeepAnalysis = {
+        '译梦机': '《译梦机》是《太空人》专辑的序曲，时长超过七分钟，分为四个章节：〈译梦机〉、〈回音收集员〉前奏、〈失忆镇〉前奏、〈Outsider〉前奏。吴青峰以梦呓般的念白开场，穿插倒转音效、环境音与碎片化词句，营造潜意识与现实交错的迷幻感。“通过一首歌找到了和我做同一种梦的人”——这句歌词点出专辑核心：音乐是翻译梦境的机器，也是连接孤独灵魂的桥梁。编曲上，钢琴与电子氛围层层堆叠，从静谧到爆发再归于虚无，模拟了从入睡、做梦到醒来的全过程。这首歌探讨的是人与自己的沟通：白天被压抑的思绪在梦里重新编码，而音乐正是解码的工具。吴青峰曾表示，这是他写过最私密的歌之一，也是专辑的“总纲”。',
+        '失忆镇': '《失忆镇》延续《译梦机》的梦境主题，但更聚焦记忆与遗忘的辩证。歌词充满迷宫、废墟、失踪等意象：“我忘了 忘了 我身在何处”“记忆的线索 断了又接”。吴青峰用呢喃式唱腔与冷冽电子音色，营造记忆正在蒸发的无力感。歌曲结构松散，像一座随时会崩塌的失忆镇。核心追问是：如果记忆构成“我”，当记忆消失，“我”还是谁？这种对存在本质的追问，让《失忆镇》成为专辑最具哲学重量的一首。音乐上，破碎的节拍与回声效果象征记忆的残片，结尾的空白长达数十秒，仿佛记忆彻底清空后的虚无。',
+        '巴别塔庆典': '《巴别塔庆典》是《太空人》首支曝光单曲，灵感源自圣经巴别塔——人类因语言变乱而无法沟通。吴青峰将沟通谬误转化为荒诞庆典：“这里是自说自话王国欢迎光临”。他用戏谑唱腔与跳跃编曲讽刺现代社会中每个人都活在自己的语言体系里。歌曲融合摇滚、电子与进行曲元素，铜管乐器营造庆典感，却夹杂着扭曲音效，暗示表面的热闹下是深刻的隔阂。MV中吴青峰扮演多个角色自说自话，视觉化地呈现主题。这首歌并非全然悲观，反而在承认沟通失效后找到自得其乐的自由。',
+        '回音收集员': '《回音收集员》是一首概念性极强的作品——歌词全部来自《太空人》专辑其他十一首歌的词句碎片，经重新排列组合而成。这种“回音拼贴”手法让这首歌成为专辑枢纽。吴青峰化身收集回音的人，把散落词句捡起拼凑出新意义。编曲极简，以打击乐和人声为主，突出词句本身。歌曲隐喻我们在他人话语回音中不断重构自我：我们说的话有多少是原创，多少是他人回音的拼贴？',
+        '太空人': '专辑同名曲《太空人》是吴青峰对“沟通失效”最直接的情感表达。歌词讲述太空漂浮者向地球发送信号，却因“重听”误解回应：“我的重听，以为你说继续，原来你说的是离去”。太空是大脑隐喻，无重力象征情感失重与孤独。歌曲以极简钢琴铺底，吴青峰的声线赤裸呈现，副歌部分弦乐骤然涌入，如情感决堤。这首歌录制时吴青峰多次落泪，因为它触及他最深的孤独感——渴望连接却不断错过的无力。',
+        '太空': '《太空》与《太空人》呼应，但更静谧内省。歌词极简，编曲以氛围音色为主，营造无边空旷感。“航行太空 心太空”反复吟唱，像在真空中漂浮的自言自语。这首歌探讨孤独的另一面：不是痛苦，而是平静、甚至带有神圣感的孤独。吴青峰在演唱会常将这首歌作为安可曲，让全场在安静中共同感受这种孤独的美。',
+        '男孩庄周': '《男孩庄周》借用庄周梦蝶典故，探讨真实与虚幻的边界。“他到来，仿佛乘光而来的小孩”——吴青峰以孩童纯真视角解构沉重哲学命题。歌曲轻盈跳跃，电子音色与童趣旋律交织，像一场不愿醒来的梦。男孩庄周分不清蝴蝶与梦境，但他不纠结，因为相信两者本就相通。这是专辑最具童趣和哲思的一首，灵感来自吴青峰梦见自己变成小孩，醒来后写下这首歌。',
+        '太空船': '《太空船》是《男孩庄周》的姐妹篇，延续“用想象力对抗平庸”的主题。歌曲描述一个随时可以“坐上太空船”的人，把平凡街道变成星际航程。“坐上太空船 去到哪里都不奇怪”——献给所有不愿长大的人，告诉他们想象力是最强大的交通工具。编曲轻快活泼，加入电子游戏音效，充满童趣。',
+        '费洛蒙小姐': '《费洛蒙小姐》是吴青峰首次为他人谱曲，写给舞台剧《踏青去》。曲风多变，有多处任性转调，充满戏剧张力。“谁会想到毛毛虫长大了变蝴蝶，谁会想到祝英台爱上了梁山伯”——用一连串反问宣告不被定义的自由。费洛蒙小姐是叛逆的、热烈的、无法归类的，存在本身就是对规则的反抗。歌曲融合摇滚、爵士、音乐剧元素，吴青峰用多种唱腔演绎不同人格，展现惊人可塑性。',
+        '穿墙人': '《穿墙人》延续费洛蒙小姐的叛逆精神，但更聚焦“能力与孤独”的辩证。主角拥有穿墙能力，可以跨越一切障碍，却也因此被视为异类，永远孤独。歌曲在张扬摇滚编曲下藏着淡淡悲伤——自由是有代价的，但依然值得。“穿过了墙 也穿过了你”唱出一种决绝的孤独。',
+        '沙滩上的佛洛一德': '《沙滩上的佛洛一德》由诗人李格弟作词，是《册叶一》上册谢幕曲。将精神分析大师佛洛一德放置在沙滩上，让他在潮汐进退间思索“遗忘的底线”。“佛洛一德在沙滩上 深沉的海在右手边”——慵懒迷幻的唱腔引领听众在意识与潜意识海岸散步。编曲以吉他和海浪声铺底，营造半梦半醒氛围。歌曲探讨：我们拼命想记住的，和努力想遗忘的，究竟哪样更真实？',
+        '阿兹海默': '《阿兹海默》是一首关于遗忘与爱的温柔挽歌。以阿兹海默症为隐喻，描述记忆如沙子从指缝流走。“我忘了 忘了 你的名字 却还记得 你的样子”——即使在遗忘尽头，依然有情感无法抹去。吴青峰用极轻极缓的唱法，将无力与温柔交织的情绪表现得令人心碎。',
+        '宁静海': '《宁静海》以月球表面“宁静海”为意象，隐喻深沉克制的情感。月球表面看似平静，却拥有足以牵动地球潮汐的巨大引力。“我重力的我 因你而有引力”——吴青峰用这首歌描述那些不善于表达、却爱得最深沉的人。编曲以钢琴和弦乐为主，像潮汐般起伏。',
+        '最难的是相遇': '《最难的是相遇》由李格弟作词，用潜水意象描绘相遇的难得与晕眩。“因为多么难得是我，因为更难得更不可遇是你”——歌词层层递进，将相遇描述为需要深潜才能触及的奇迹。编曲如海浪起伏，吴青峰的演唱从低吟到高亢，完美呈现从深海浮出水面的过程。',
+        '（……小小牧羊人）': '《（……小小牧羊人）》是《马拉美的星期二》沙龙嘉宾曲之一，与微光古乐集合作，融入希腊神话与格林童话典故。“可爱的阿卡迪亚魔笛，我跟着你”——牧羊人引领思想羊群在想象草原自由漫游。吴青峰将创作比喻为牧羊，声音来自灵魂深处的颤动，短暂、不可复制，却只属于自己。编曲使用古乐器与电子音色交织，营造古老又现代的梦幻感。',
+        '（……海妖沙龙）': '海妖沙龙展现吴青峰化身马拉美、邀请海妖作为沙龙嘉宾的想象。海妖用歌声吸引水手，但内心保持清醒距离。“怎么样，咬我呀，我才不在乎”——自由到近乎挑衅的态度是这首歌的核心精神。迷人而危险，是海妖，也是每一个不愿为任何人停留的灵魂。编曲融合电子舞曲与古典弦乐，海妖的歌声既诱惑又疏离。',
+        '（……醉鬼阿Q）': '醉鬼阿Q用微醺姿态对抗荒诞世界。融合阿Q精神与酒精麻醉感，表面上醉醺醺、什么都不在乎，实际上比谁都清醒。“没有意义会不会反而有意义”——对虚假意义的拒绝与《Everybody Woohoo》一脉相承。编曲慵懒摇摆，加入酒吧环境音，让人仿佛置身深夜小酒馆。',
+        '（……老顽固博士）': '老顽固博士是声音的炼金术士。迷恋实验，固执相信通过反复尝试可以炼出奇迹。“石板琴独奏，顽固地实验”——用炼金术意象隐喻创作过程，赞美不随波逐流、坚持自己节奏的偏执。编曲以打击乐和实验音效为主，模拟实验室的声响。',
+        '（……睡美人）': '睡美人沉睡在自己世界，等待对的时机或对的人来唤醒。“沉睡中 等待 一个吻 或一场雨”——童话意象探讨沉睡与觉醒的辩证。沉默不是空洞，而是一座花园。吴青峰唱出静谧的力量：不急躁、不迎合，相信当时刻来临，自然会醒来。编曲如摇篮曲般温柔，后半段逐渐苏醒，弦乐层层加入。',
+        'Outsider': '《Outsider》是《太空人》专辑压轴曲，由刘家凯作曲、吴青峰填词。第一人称描述站在世界外面看着里面的人。“我站在 世界的外面 看着里面”——局外人疏离让他拥有更清晰视野，孤独让他更完整。歌曲长达近九分钟，后半段是大段器乐演奏，像一场漫长的凝视。MV入选戛纳世界电影节最佳哲学电影。吴青峰说这首歌是写给所有觉得自己格格不入的人。',
+        '伤风': '《伤风》探讨人性中“伤害的风气”——当人们盲目附和他人，自主意识脱水蒸发，像感染流行性感冒。“病房里面有点暗，病人们正流着汗”——用病房意象描述集体感染的社会图景。敏感的人既易被伤害感染，也易成为传染源。但歌曲并非谴责脆弱，而是将脆弱呈现为美学。编曲以工业电子音色和呼吸声营造压抑感。',
+        '年轮说': '《年轮说》是吴青峰为杨丞琳量身打造的作品，以树木年轮隐喻成长轨迹。“看回忆这把刀，切开我身体，研究我的风雨”——时间比作解剖刀，每圈年轮都是相遇与离别留下的印记。歌曲从低吟开始层层堆叠，到最后情感爆发，完美呈现时间的累积与爆发。杨丞琳的版本已成为经典，吴青峰自己也多次现场演绎。',
+        '极光': '《极光》是《年轮说》的延续，极光绚烂却短暂，像生命中耀眼但易逝的瞬间。编曲空灵辽阔，吴青峰的声线如极光在夜空中流动。它提醒我们：有些美好注定短暂，但正因短暂才更珍贵。',
+        '线的记忆': '《线的记忆》用“线”的意象串联记忆、关系与命运。线是连接也是束缚，可以牵引也可以缠绕。歌曲在温柔旋律下探讨人与人之间看不见却真实存在的连结——有些线断了，有些还在，它们共同编织成我们的生命故事。',
+        '等': '《等》是一首关于等待的哲学诗。等待让时间变得黏稠，但也让相遇更珍贵。极简编曲和重复旋律模拟等待中漫长而静止的状态。吴青峰用最少的音符表达最丰富的情感。'
+      };
+
+      // 人格数据库（不变）
+      const personalityDB = [
+        { id: 'dreamweaver', name: '译梦编织者', en: 'Dreamweaver', desc: '你活在梦与醒的缝隙，把呓语翻译成诗。你擅长捕捉潜意识里的碎片，将它们编织成独属于自己的语言。失眠是你的灵感来源，那些说不清的思绪，在深夜汇聚成河流。', songs: ['译梦机', '失忆镇'], lyric: '"通过一首歌 找到了和我 做同一种梦的人" —— 《译梦机》', dimensions: { '梦境捕捉': 92, '孤独内省': 85, '碎片重构': 88, '敏感直觉': 80 }, dimensionDescs: { '梦境捕捉': '潜意识与现实的交融', '孤独内省': '在独处中与自己对话', '碎片重构': '把零散意象拼成完整', '敏感直觉': '对细微变化的感知力' }, similar: ['巴别塔庆典者', 'Outsider'], evaluation: '《译梦机》探讨人与自己的沟通，是《太空人》专辑的序章。你像那个拥有制梦能力的人，把破碎的讯息翻译成梦境。你的内心世界如同这首歌，分为多个章节，在梦与梦之间穿梭。你擅长把抽象的情绪转化为具体的意象，像一台永不停止的译梦机，在失眠的夜里不断运转。那些别人听不懂的呓语，是你最真诚的表达。', icon: '🌌🧠' },
+        { id: 'babel-celebrant', name: '巴别塔庆典者', en: 'Babel Celebrant', desc: '你深知语言是荒诞的，于是你在“自说自话王国”里自得其乐。你用反讽和幽默对抗世界的误解，在沟通的废墟上搭起自己的庆典。', songs: ['巴别塔庆典', '回音收集员'], lyric: '"这里是自说自话王国 欢迎光临" —— 《巴别塔庆典》', dimensions: { '反讽洞察': 90, '孤独狂欢': 82, '语言解构': 88, '黑色幽默': 85 }, dimensionDescs: { '反讽洞察': '看穿沟通的谬误', '孤独狂欢': '在误解中独自庆祝', '语言解构': '拆解既定语义', '黑色幽默': '用笑声对抗荒诞' }, similar: ['译梦编织者', '伤风患者'], evaluation: '《巴别塔庆典》是《太空人》首支单曲，灵感来自巴别塔传说，探讨语言沟通的谬误。你深刻理解“自说自话”的本质——每个人都在用自己的语言说着别人听不懂的话。你不强求被理解，反而在其中找到了一种荒诞的快乐。像回音收集员一样，你收集着那些被误解的回音，拼凑出新的意义。', icon: '🎭🗣️' },
+        { id: 'space-wanderer', name: '太空漫游者', en: 'Space Wanderer', desc: '你的心是太空，在无重力中漂浮，渴望连接却常常失重。你的敏感让你能感知到别人忽略的情绪波长。', songs: ['太空人', '太空'], lyric: '"我的重听 以为你说继续 原来你说的是离去" —— 《太空人》', dimensions: { '敏感纤细': 95, '渴望连接': 80, '孤独漂浮': 88, '幻想漫游': 84 }, dimensionDescs: { '敏感纤细': '捕捉微妙的情感波动', '渴望连接': '心底对理解的呼唤', '孤独漂浮': '在人群中的抽离感', '幻想漫游': '构建内心的宇宙' }, similar: ['男孩庄周', 'Outsider'], evaluation: '《太空人》是吴青峰首张个人专辑的同名曲，整张专辑集中探讨沟通的谬误与梦与醒的边界。你说“太空”在自己的想象中更像自己的大脑，在自己的生命里探索。你就是那个在太空里漂浮的人，发出去的信号常常被误解，但你依然坚持发送。', icon: '🚀🪐' },
+        { id: 'zhuangzi-boy', name: '男孩庄周', en: 'Zhuangzi Boy', desc: '你像乘光而来的孩子，分不清蝴蝶与梦境。你用纯真解构一切复杂，在现实与寓言的缝隙里自由穿梭。', songs: ['男孩庄周', '太空船'], lyric: '"他到来 仿佛乘光而来的小孩" —— 《男孩庄周》', dimensions: { '哲思童真': 90, '自由洒脱': 88, '梦幻倾向': 92, '解构现实': 80 }, dimensionDescs: { '哲思童真': '用孩子的眼睛看世界', '自由洒脱': '不被框架约束', '梦幻倾向': '现实与梦境的模糊', '解构现实': '把沉重变轻盈' }, similar: ['译梦编织者', '小小牧羊人'], evaluation: '《男孩庄周》用庄周梦蝶的典故，探讨真实与虚幻的边界。你像一个永远长不大的孩子，用最纯粹的目光看待世界。你不纠结于什么是真什么是假，因为你相信两者本就相通。就像《太空船》里那个在日常中发现奇幻惊喜的人，把平凡变成冒险。', icon: '🦋🧒' },
+        { id: 'echo-collector', name: '回音收集员', en: 'Echo Collector', desc: '你收集生活中所有碎片与回音，把它们拼贴成全新的意义。你擅长从别人的话语里找到隐藏的情感。', songs: ['回音收集员', '线的记忆'], lyric: '"这个是我收集的不爱 来自他说不可能不爱" —— 《回音收集员》', dimensions: { '碎片拼贴': 92, '情感敏锐': 86, '记忆编织': 84, '回音捕捉': 90 }, dimensionDescs: { '碎片拼贴': '把零散拼成完整', '情感敏锐': '捕捉言外之意', '记忆编织': '把过往织成故事', '回音捕捉': '听见别人忽略的声音' }, similar: ['巴别塔庆典者', '费洛蒙小姐'], evaluation: '《回音收集员》的歌词全部来自《太空人》专辑中其他歌曲的“回音”，是专辑的概念枢纽。你就像一个收集回音的人，把别人说过的话收集起来，重新排列组合，让它们产生新的含义。你不善于主动表达，但你善于倾听和整理，在回音中找到自己的声音。', icon: '📻✂️' },
+        { id: 'pheromone-miss', name: '费洛蒙小姐', en: 'Miss Pheromone', desc: '你充满戏剧张力，叛逆又热烈，不愿被任何人定义。你的存在本身就是一种宣言，散发着让人无法忽视的能量。', songs: ['费洛蒙小姐', '穿墙人'], lyric: '"谁会想到 毛毛虫长大了变蝴蝶 谁会想到 祝英台爱上了梁山伯" —— 《费洛蒙小姐》', dimensions: { '叛逆自由': 96, '戏剧张力': 88, '存在宣言': 90, '不羁灵魂': 86 }, dimensionDescs: { '叛逆自由': '拒绝被规训', '戏剧张力': '天生的舞台感', '存在宣言': '以存在本身表达', '不羁灵魂': '永远不被定义' }, similar: ['海妖沙龙', '醉鬼阿Q'], evaluation: '《费洛蒙小姐》是吴青峰首次替他人谱曲，为舞台剧《踏青去》而作。歌曲曲风多变，有多处任性转调，充满戏剧张力。你就像费洛蒙小姐，身上带着一种无法被归类的气质。你不在乎别人的眼光，只按照自己的节奏生活，像蝴蝶一样自由蜕变。', icon: '💃🔥' },
+        { id: 'beach-freud', name: '沙滩上的佛洛一德', en: 'Beach Freud', desc: '你在意识与潜意识的海岸徘徊，把梦境当作现实的延伸。你擅长自我分析，在沙粒中寻找被遗忘的答案。', songs: ['沙滩上的佛洛一德', '阿兹海默'], lyric: '"佛洛一德在沙滩上 深沉的海在右手边" —— 《沙滩上的佛洛一德》', dimensions: { '潜意识探索': 94, '迷幻沉思': 84, '记忆考古': 86, '自我分析': 88 }, dimensionDescs: { '潜意识探索': '潜入心灵的深海', '迷幻沉思': '在半梦半醒间思考', '记忆考古': '挖掘被遗忘的片段', '自我分析': '不断解剖自己' }, similar: ['译梦编织者', '当幽灵失灵'], evaluation: '《沙滩上的佛洛一德》由诗人李格弟作词，是《册叶一》上册的谢幕之曲。佛洛一德在沙滩上思索遗忘的底线，像一场集体治疗。你也是一个不断分析自己的人，在意识的边界上散步，试图理解那些被压抑的情感和记忆。', icon: '🏖️🧠' },
+        { id: 'quiet-sea', name: '宁静海', en: 'Mare Tranquillitatis', desc: '表面平静如月球表面，内心却有巨大的引力。你爱得深沉而克制，用最安静的方式承载最汹涌的情感。', songs: ['宁静海', '最难的是相遇'], lyric: '"因为多么难得是我 因为更难得更不可遇是你" —— 《最难的是相遇》', dimensions: { '深情克制': 95, '温柔引力': 88, '孤独守候': 82, '浪漫深沉': 90 }, dimensionDescs: { '深情克制': '把爱藏在最深处', '温柔引力': '静静吸引靠近的人', '孤独守候': '在寂静中等待', '浪漫深沉': '海底的暗涌' }, similar: ['太空漫游者', '等'], evaluation: '《最难的是相遇》由李格弟作词，用潜水的意象描绘相遇的晕眩与难得。你的内心像宁静海，表面波澜不惊，底下却有着强大的引力场。你不擅长热烈表达，但你的情感深沉而持久，像月球的引力牵动潮汐。你相信最难的是相遇，所以更珍惜每一个走进你生命的人。', icon: '🌊🌕' },
+        { id: 'little-shepherd', name: '小小牧羊人', en: 'Little Shepherd', desc: '你放牧着脑中的思想羊群，在创作的迷宫里自由行走。你相信声音来自灵魂的颤动，每一次表达都是独一无二的。', songs: ['（……小小牧羊人）', '（……催眠大师）'], lyric: '"可爱的阿卡迪亚魔笛 我跟着你 我跟着你" —— 《（……小小牧羊人）》', dimensions: { '创作本能': 96, '自由游牧': 88, '灵魂震颤': 92, '幻想漫游': 86 }, dimensionDescs: { '创作本能': '无法抑制的表达欲', '自由游牧': '不被固定的方向', '灵魂震颤': '听见内心的嗡鸣', '幻想漫游': '在想象中无限漫游' }, similar: ['男孩庄周', '老顽固博士'], evaluation: '《（……小小牧羊人）》以创作沙龙为概念，与微光古乐集合作，融入希腊神话与格林童话典故，探讨创作的本质。你像一个牧羊人，引领着思想的羊群在想象的草原上漫游。你不受规则约束，你的表达来自灵魂最深处的颤动，像回廊里的嗡鸣，短暂却只属于你自己。', icon: '🐑🎼' },
+        { id: 'siren-salon', name: '海妖沙龙', en: 'Siren Salon', desc: '你用魅惑与智慧吸引他人，但内心保持清醒的距离。你是沙龙的核心，迷人而危险，像海妖的歌声让人无法抗拒。', songs: ['（……海妖沙龙）', '（……醉鬼阿Q）'], lyric: '"怎么样 咬我呀 我才不在乎" —— 《（……海妖沙龙）》精神', dimensions: { '魅惑力量': 92, '清醒距离': 84, '自由宣言': 90, '神秘气质': 88 }, dimensionDescs: { '魅惑力量': '让人无法忽视', '清醒距离': '永远保持自我', '自由宣言': '不在乎他人眼光', '神秘气质': '让人想要靠近却看不透' }, similar: ['费洛蒙小姐', '棕发少女'], evaluation: '《马拉美的星期二》是吴青峰化身法国象征主义诗人马拉美，邀请音乐伙伴作沙龙嘉宾的创作沙龙。海妖沙龙展现了“怎么样，咬我呀，我才不在乎”的自由态度。你像沙龙里的海妖，用魅力吸引众人，但你从不为任何人停留，你的自由比任何关系都重要。', icon: '🧜‍♀️🍷' },
+        { id: 'sleeping-beauty', name: '睡美人', en: 'Sleeping Beauty', desc: '你沉睡在自己的世界里，等待一个对的时机或一个对的人来唤醒你。你的沉默不是空洞，而是一座花园。', songs: ['（……睡美人）', 'Outsider'], lyric: '"睡吧 睡吧 今天沙龙零点打烊" —— 《（……睡美人）》意境', dimensions: { '深度内省': 90, '静谧等待': 82, '梦境沉潜': 88, '觉醒潜能': 80 }, dimensionDescs: { '深度内省': '不断向内探索', '静谧等待': '相信时机到来', '梦境沉潜': '在梦里构建世界', '觉醒潜能': '积蓄爆发的力量' }, similar: ['太空漫游者', '宁静海'], evaluation: '《（……睡美人）》延续马拉美沙龙概念，用童话意象探讨沉睡与觉醒。你像睡美人，大多数时候活在自己的内心世界里，不急于表达，不急于被理解。你知道当对的人或对的时机出现时，你会自然醒来。在此之前，你的沉默是一座花园，只有真正懂得的人才能进入。', icon: '😴🌹' },
+        { id: 'drunkard-q', name: '醉鬼阿Q', en: 'Drunkard Q', desc: '你用醉意消解世界的荒诞，以自嘲对抗虚无。你比谁都清醒，只是选择了微醺的姿态来面对这个不太讲理的世界。', songs: ['（……醉鬼阿Q）', 'Everybody Woohoo'], lyric: '"哪怕是众人皆醒我独醉" —— 《（……醉鬼阿Q）》', dimensions: { '荒诞解构': 92, '自嘲智慧': 90, '微醺清醒': 84, '反叛精神': 86 }, dimensionDescs: { '荒诞解构': '看穿世界的无理', '自嘲智慧': '用自嘲化解伤害', '微醺清醒': '醉眼看世界更清楚', '反叛精神': '拒绝虚假意义' }, similar: ['巴别塔庆典者', '海妖沙龙'], evaluation: '《（……醉鬼阿Q）》用阿Q精神对抗荒诞。《Everybody Woohoo》里唱“哪有什么都能说出个意义，废话常包装成大道理”。你像醉鬼阿Q，表面上醉醺醺的，实际上比谁都清醒。你知道这个世界有太多伪装的道理，所以你选择用醉意来解构它们，用笑声来消解严肃。', icon: '🥂🤡' },
+        { id: 'stubborn-alchemist', name: '老顽固博士', en: 'Stubborn Alchemist', desc: '你迷恋实验与创造，固执地相信可以炼出奇迹。你是声音的炼金术士，用偏执改变平庸，在反复尝试中接近真理。', songs: ['（……老顽固博士）', '（……当幽灵失灵）'], lyric: '"得到一圈牛" —— 《（……老顽固博士）》', dimensions: { '创造偏执': 92, '实验精神': 90, '理性狂热': 80, '独特视角': 84 }, dimensionDescs: { '创造偏执': '不达目的不罢休', '实验精神': '不断尝试新可能', '理性狂热': '理性与激情的结合', '独特视角': '看到别人看不到的' }, similar: ['小小牧羊人', '沙滩上的佛洛一德'], evaluation: '《（……老顽固博士）》延续马拉美沙龙概念，用炼金术意象隐喻创作过程。你像一个固执的炼金术士，相信通过不断实验可以创造出新的东西。你不随波逐流，坚持自己的方法和节奏，即使别人不理解。在你的世界里，每一次尝试都是一次炼金，每一次失败都离奇迹更近一步。', icon: '⚗️🔬' },
+        { id: 'outsider', name: 'Outsider', en: 'Outsider', desc: '你是局外人，从远处凝视世界。你的视角独一无二，疏离让你更加完整。你站在世界的外面，却比任何人都看得更清楚。', songs: ['Outsider', '线的记忆'], lyric: '"我站在 世界的外面 看着里面" —— 《Outsider》意境', dimensions: { '抽离观察': 96, '边界感': 90, '孤独完整': 88, '冷静审视': 86 }, dimensionDescs: { '抽离观察': '从远处看世界', '边界感': '保持安全距离', '孤独完整': '孤独让你完整', '冷静审视': '不陷入情绪漩涡' }, similar: ['太空漫游者', '睡美人'], evaluation: '《Outsider》是《太空人》专辑的压轴曲，由刘家凯作曲，吴青峰填词。MV入选戛纳世界电影节最佳哲学电影。你是一个outsider，习惯于站在边缘观察世界。你不属于任何群体，但正因为这种疏离，你拥有更清晰的视野。你的孤独不是缺憾，而是你最珍贵的视角。', icon: '👁️🌫️' },
+        { id: 'wounded-wind', name: '伤风患者', en: 'Wounded Wind', desc: '你敏感而脆弱，像一场流行性感冒，会传染情绪。你的悲伤是美丽的，像风一样穿过人群，留下看不见的痕迹。', songs: ['伤风', '失忆镇'], lyric: '"病房里面有点暗 病人们正流着汗" —— 《伤风》', dimensions: { '敏感共情': 94, '脆弱美学': 84, '情绪传染': 82, '独特性': 80 }, dimensionDescs: { '敏感共情': '感知他人的痛苦', '脆弱美学': '把脆弱变成美', '情绪传染': '情绪如风般扩散', '独特性': '与众不同的感知方式' }, similar: ['太空漫游者', '回音收集员'], evaluation: '《伤风》探讨人性中“伤害的风气”，当人们附和他人行为时，自主意识渐渐脱水蒸发。你像伤风患者，对伤害特别敏感，但也容易感染他人。你容易被情绪淹没，但你也因此拥有深刻的共情能力。你的脆弱不是弱点，而是你感知世界的方式。', icon: '🤧🌬️' },
+        { id: 'tree-rings', name: '年轮说', en: 'Tree Rings', desc: '你用时间度量生命，每一圈年轮都是故事。你把记忆刻进身体，让成长变得可见。过去的一切都成为现在的你。', songs: ['年轮说', '极光'], lyric: '"看 回忆这把刀 切开我身体 研究我的风雨" —— 《年轮说》', dimensions: { '时间印记': 92, '成长叙事': 90, '记忆雕刻': 88, '温柔坚韧': 84 }, dimensionDescs: { '时间印记': '把时间刻进生命', '成长叙事': '每一步都有意义', '记忆雕刻': '记忆塑造现在的我', '温柔坚韧': '在时间中变得强大' }, similar: ['线的记忆', '等'], evaluation: '《年轮说》是吴青峰为杨丞琳量身打造的歌曲，以成长轨迹为灵感创作。“这圈是我，那圈是你”，把时间比作年轮，每一圈都记录着相遇与离别。你像一棵树，把所有的经历都刻进年轮里。每一段过往都让你更完整，更丰富。你不急于求成，你知道时间会让一切显形。', icon: '🌳⏳' }
+      ];
+
+      const blindBoxMap = {
+        'dreamweaver': { title: 'Storm', desc: '与AURORA合作，在风暴中寻找宁静', lyric: '"似曾相识的你 风泄漏你姓名" —— 《Storm》', persona: '译梦编织者·极光版', note: '这首歌与你内心那台永不停歇的译梦机共振——在风暴中寻找内心宁静' },
+        'babel-celebrant': { title: '作为怪物', desc: '与李宇春合作，怪物的自白', lyric: '"作为怪物 格格不入" —— 《作为怪物》', persona: '巴别塔庆典者·怪物', note: '格格不入是你最引以为傲的勋章' },
+        'space-wanderer': { title: 'Storm', desc: '与AURORA合作，在风暴中寻找宁静', lyric: '"Cause above the rain above the clouds it\'s always bright" —— 《Storm》', persona: '太空漫游者·极光版', note: '乌云之上必有光照着——这是属于你的信念' },
+        'zhuangzi-boy': { title: '哥伦布的蛋', desc: '打破常规，发现新大陆', lyric: '"我生来就是一个动词 喜欢换条路走而迷失" —— 《哥伦布的蛋》', persona: '男孩庄周·航海家', note: '你生来就是一个动词，永远在探索的路上' },
+        'echo-collector': { title: '窥', desc: '窥探内心的秘密', lyric: '"放一颗星球 在你的眉头 等你开口 再长出宇宙" —— 《窥》', persona: '回音收集员·窥探者', note: '你在收集回音的同时，也在窥探人心的宇宙' },
+        'pheromone-miss': { title: '作为怪物', desc: '与李宇春合作，怪物的自白', lyric: '"作为怪物 格格不入" —— 《作为怪物》', persona: '费洛蒙小姐·怪物', note: '你的叛逆与独特，就是最美的怪物宣言' },
+        'quiet-sea': { title: '寂寞的时候', desc: '寂寞的独白', lyric: '"寂寞的时候会想要写一首歌给你" —— 《寂寞的时候》', persona: '宁静海·孤岛', note: '在寂静中，你的情感反而最汹涌' },
+        'little-shepherd': { title: '哥伦布的蛋', desc: '打破常规，发现新大陆', lyric: '"地球是一颗蛋 躺着哥伦布" —— 《哥伦布的蛋》', persona: '小小牧羊人·发现者', note: '像哥伦布打破蛋壳，你在创作中打破一切常规' },
+        'siren-salon': { title: 'Everybody Woohoo', desc: '放纵与狂欢，拒绝被定义', lyric: '"我快乐时候 woo 我难过更要 woo" —— 《Everybody Woohoo》', persona: '海妖沙龙·派对', note: '你的自由不需要理由，woohoo就对了' },
+        'drunkard-q': { title: 'Everybody Woohoo', desc: '放纵与狂欢，拒绝被定义', lyric: '"没有意义会不会反而有意义" —— 《Everybody Woohoo》', persona: '醉鬼阿Q·狂欢者', note: '既然没有意义，不如痛快woohoo' },
+        'outsider': { title: '你的影子是我的海', desc: '影子与海，孤独与陪伴', lyric: '"我底心是一座小小的岛 你远比它巨大" —— 《你的影子是我的海》', persona: 'Outsider·岛屿', note: '孤独如岛屿，影子如海浪——来自王小苗诗集' },
+        'tree-rings': { title: '歌颂者', desc: '为歌颂而存在', lyric: '"我想我很适合 当一个歌颂者" —— 《歌颂者》', persona: '年轮说·歌颂者', note: '你歌颂时间，也被时间歌颂' }
+      };
+
+      // 简化后的题目
+      const questions = [
+        { text: '夜深人静时，你的思绪通常会？', options: ['整理白天的碎片', '任由念头漂浮', '陷入回忆咀嚼', '构建另一个世界'] },
+        { text: '与人交流时，你最容易感觉到？', options: ['词不达意', '对方听不懂我', '我能捕捉隐藏情绪', '交流像一场表演'] },
+        { text: '“梦”对你来说是什么？', options: ['潜意识的语言', '另一个真实', '与现实没有边界', '创作的素材'] },
+        { text: '被误解时，你通常会？', options: ['尝试解释', '算了不解释', '默默消化', '用幽默带过'] },
+        { text: '哪种人格特质最打动你？', options: ['纯真', '叛逆', '理性', '温柔深沉'] },
+        { text: '哪个场景最能激发你的灵感？', options: ['深夜孤灯', '热闹聚会', '海边潮汐', '宇宙星空'] },
+        { text: '你怎么看待“语言”？', options: ['可以不断变形的诗', '常造成误解', '我喜欢收集拼贴', '沉默更有力量'] },
+        { text: '你想选以下哪一种超能力？', options: ['进入梦境', '听懂真实意图', '时间暂停', '太空漂浮'] },
+        { text: '情感表达更接近？', options: ['克制深沉', '热烈直接', '用作品代替', '幽默包裹'] },
+        { text: '你在世界中更像什么角色？', options: ['观察者', '体验者', '创造者', '游牧者'] },
+        { text: '你会如何处理过去的记忆？', options: ['小心收藏', '像年轮一样成为自己的一部分', '遗忘也很美', '写成作品'] },
+        { text: '面对荒诞世界，你通常？', options: ['自嘲消解', '清醒记录', '参与扮演', '抽离观看'] },
+        { text: '你认为“自我”是什么？', options: ['不断流动', '记忆经历构成', '需探索的谜', '碰撞后的反射'] },
+        { text: '你认为在你身上哪种矛盾最突出？', options: ['渴望连接又怕误解', '纯真与复杂', '叛逆但渴望认同', '理性感性拉扯'] },
+        { text: '在人群中你常常？', options: ['像局外人', '散发能量', '收集细节', '享受但可抽身'] },
+        { text: '创作或表达时更接近？', options: ['潜意识流淌', '精心构造', '碎片拼贴', '即兴自由'] },
+        { text: '人生更像什么？', options: ['一场梦', '一次航行', '一本书', '一部电影'] },
+        { text: '你对“规则”的态度是怎样的？', options: ['用来打破', '理解不一定遵守', '用来观察', '重新定义'] },
+        { text: '你在独处时通常会？', options: ['思考内省', '创造', '发呆', '沉浸音乐书籍'] },
+        { text: '你如何定义“美”？', options: ['真实哪怕破碎', '自由不被定义', '超越现实的梦', '跨越隔阂的连接'] }
+      ];
+
+      let currentStep = 'intro';
+      let answers = new Array(questions.length).fill(-1);
+      let currentIndex = 0;
+      let resultPersonality = null;
+      
+      const contentEl = document.getElementById('content-area');
+      const authorNoteEl = document.getElementById('author-note-container');
+
+      function render() {
+        authorNoteEl.innerHTML = `<span>—— 撒布喂喂喂 · AI生成仅供娱乐 ——</span>`;
+        if (currentStep === 'intro') renderIntro();
+        else if (currentStep === 'quiz') renderQuiz();
+        else if (currentStep === 'result') renderResult();
+      }
+
+      function renderIntro() {
+        contentEl.innerHTML = `
+          <div style="text-align: center;">
+            <div style="font-size: 4rem; margin-bottom: 10px;">🧑‍🚀</div>
+            <h1>太空人·册叶·马拉美</h1>
+            <div style="font-size: 1.2rem; margin-bottom: 24px; opacity: 0.8;">吴青峰 音乐人格图谱</div>
+            <p style="margin-bottom: 32px; line-height: 1.7;">基于三张专辑40首歌曲，探索你的「青峰式人格」。</p>
+            <button class="btn btn-primary" id="start-btn" style="font-size:1.3rem; padding:14px 50px;"><i class="fas fa-play"></i> 开始测试</button>
+            <p style="margin-top:28px; opacity:0.6;">20道题 · 约3分钟</p>
+          </div>
+        `;
+        document.getElementById('start-btn').addEventListener('click', () => {
+          currentStep = 'quiz'; currentIndex = 0; answers = new Array(questions.length).fill(-1); render();
+        });
+      }
+
+      function renderQuiz() {
+        const q = questions[currentIndex];
+        const progress = ((currentIndex) / questions.length) * 100;
+        contentEl.innerHTML = `
+          <div>
+            <div style="display:flex; justify-content:space-between; margin-bottom:16px;"><span>第 ${currentIndex+1} / ${questions.length} 题</span></div>
+            <div class="progress-bar-container"><div class="progress-fill" style="width:${progress}%;"></div></div>
+            <h2 style="margin:20px 0;">${q.text}</h2>
+            <div class="options-list" id="options-container"></div>
+            <div class="nav-actions"><button class="btn btn-outline" id="prev-btn" ${currentIndex===0?'disabled style="opacity:0.4;"':''}><i class="fas fa-arrow-left"></i> 上一题</button></div>
+          </div>
+        `;
+        const container = document.getElementById('options-container');
+        q.options.forEach((opt, idx) => {
+          const div = document.createElement('div'); div.className = 'option-item'; div.innerHTML = opt;
+          div.addEventListener('click', () => {
+            answers[currentIndex] = idx;
+            if (currentIndex < questions.length - 1) { currentIndex++; render(); }
+            else { computeResult(); }
+          });
+          container.appendChild(div);
+        });
+        document.getElementById('prev-btn')?.addEventListener('click', () => { if(currentIndex>0){ currentIndex--; render(); } });
+      }
+
+      function computeResult() {
+        let idx = 0; const cnt = [0,0,0,0]; answers.forEach(a=>{ if(a>=0) cnt[a]++; });
+        const dominant = cnt.indexOf(Math.max(...cnt));
+        if(dominant===0) idx = answers[0]===0 ? 0 : (answers[3]===0?13:4);
+        else if(dominant===1) idx = answers[4]===1 ? 5 : (answers[1]===1?1:9);
+        else if(dominant===2) idx = answers[10]===2 ? 15 : (answers[8]===2?7:8);
+        else idx = answers[11]===3 ? 11 : (answers[2]===3?3:12);
+        idx = Math.min(idx, personalityDB.length-1);
+        resultPersonality = personalityDB[idx];
+        currentStep = 'result'; render();
+      }
+
+      function renderResult() {
+        if(!resultPersonality) return;
+        const p = resultPersonality;
+        const entries = Object.entries(p.dimensions);
+        const similarHtml = p.similar.map(s => {
+          const found = personalityDB.find(x => x.name === s);
+          return found ? `<span class="similar-link" data-persona-id="${found.id}">${s}</span>` : s;
+        }).join(' · ');
+        const blindBox = blindBoxMap[p.id] || null;
+        const primarySong = p.songs[0];
+        contentEl.innerHTML = `
+          <div>
+            <button class="btn btn-outline" id="restart-btn" style="margin-bottom:20px;"><i class="fas fa-undo-alt"></i> 重测</button>
+            <div class="persona-illustration"><span style="font-size:5rem;">${p.icon}</span></div>
+            <h2>${p.name} <span style="font-size:1.2rem; opacity:0.8;">${p.en}</span></h2>
+            <p style="margin-bottom:24px;">${p.desc}</p>
+            <div class="song-card">
+              <div style="display:flex; justify-content:space-between;"><span><i class="fas fa-music"></i> 和你最像的歌曲：${p.songs.join(' / ')}</span><span class="deep-link" data-song="${primarySong}">📖 深度解读</span></div>
+              <div style="margin-top:18px; font-style:italic; border-left:3px solid var(--primary-light); padding-left:18px;">“${p.lyric}”</div>
+            </div>
+            <h3>维度分析</h3>
+            ${entries.map(([k,v])=>`<div class="dimension-item"><div style="display:flex; justify-content:space-between;"><span>${k}</span><span>${v}%</span></div><div class="dim-bar"><div class="${v>=90?'dim-fill-high':(v>=85?'dim-fill-mid':'dim-fill-low')}" style="width:${v}%; height:8px;"></div></div><div style="font-size:0.85rem; opacity:0.75;">${p.dimensionDescs[k]}</div></div>`).join('')}
+            <div style="margin:24px 0;"><span style="opacity:0.8;">相似人格：</span> ${similarHtml}</div>
+            <div style="background:rgba(255,255,255,0.03); padding:22px; border-radius:24px; line-height:1.7;"><i class="fas fa-feather-alt"></i> <strong>人物评价</strong><br>${p.evaluation}</div>
+            ${blindBox?`<div class="blind-box">🎁 单曲惊喜</span></div><div style="margin-top:18px;"><div style="font-size:1.5rem;">${blindBox.title}</div><div>${blindBox.desc}</div><div style="opacity:0.8;">✨ ${blindBox.persona}</div><div style="margin-top:14px; font-style:italic;">“${blindBox.lyric}”</div><p style="margin-top:12px; font-size:0.9rem;"><i class="far fa-star"></i> ${blindBox.note}</p></div></div>`:''}
+            <div style="margin-top:30px; display:flex; gap:12px;"><button class="btn btn-primary" id="restart-btn2"><i class="fas fa-redo-alt"></i> 重新探索</button><button class="btn btn-outline" id="share-fake"><i class="fas fa-share-alt"></i> 保存卡片</button></div>
+          </div>
+        `;
+        document.querySelectorAll('[data-persona-id]').forEach(el => {
+          el.addEventListener('click', () => {
+            const persona = personalityDB.find(p => p.id === el.dataset.personaId);
+            if(persona) showModal(persona.name, persona.en, persona.desc, persona.songs.join(' / '));
+          });
+        });
+        document.querySelector('.deep-link')?.addEventListener('click', (e) => {
+          const song = e.target.dataset.song;
+          showSongModal(song, songDeepAnalysis[song] || '暂无详细解读。');
+        });
+        document.getElementById('restart-btn')?.addEventListener('click', ()=>{ currentStep='intro'; render(); });
+        document.getElementById('restart-btn2')?.addEventListener('click', ()=>{ currentStep='intro'; render(); });
+        document.getElementById('share-fake')?.addEventListener('click', ()=>{ alert('✨ 截图保存你的卡片吧！'); });
+      }
+
+      function showModal(name, en, desc, songs) {
+        const overlay = document.createElement('div'); overlay.className = 'modal-overlay';
+        overlay.innerHTML = `<div class="modal-card"><h3 style="color:white;">${name} <span style="font-size:0.9rem;">${en}</span></h3><p style="color:white; margin:16px 0;">${desc}</p><p style="color:white;">歌曲：${songs}</p><button class="btn btn-outline" style="margin-top:24px; width:100%; color:white;" id="close-modal">关闭</button></div>`;
+        document.body.appendChild(overlay);
+        overlay.addEventListener('click', (e) => { if(e.target===overlay) overlay.remove(); });
+        document.getElementById('close-modal').addEventListener('click', ()=>overlay.remove());
+      }
+
+      function showSongModal(song, analysis) {
+        const overlay = document.createElement('div'); overlay.className = 'modal-overlay';
+        overlay.innerHTML = `<div class="modal-card"><h3 style="color:white;">📖 深度解读 · ${song}</h3><p style="color:white; line-height:1.7; max-height:400px; overflow-y:auto; padding-right:8px;">${analysis}</p><button class="btn btn-outline" style="margin-top:24px; width:100%; color:white;" id="close-song-modal">关闭</button></div>`;
+        document.body.appendChild(overlay);
+        overlay.addEventListener('click', (e) => { if(e.target===overlay) overlay.remove(); });
+        document.getElementById('close-song-modal').addEventListener('click', ()=>overlay.remove());
+      }
+
+      render();
+    })();
+  </script>
+</body>
+</html>
